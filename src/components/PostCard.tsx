@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
-import { Heart, MessageCircle, ChevronDown, ChevronUp, HandHeart, Share2, BarChart3 } from 'lucide-react';
+import { Heart, MessageCircle, ChevronDown, ChevronUp, HandHeart } from 'lucide-react';
 import EmotionBadge from './EmotionBadge';
-import WellnessModal from './WellnessModal';
+import SupportSection from './SupportSection';
 import PostPoll from './PostPoll';
 import { formatTimeAgo } from '@/lib/emotions';
 import { toast } from 'sonner';
@@ -23,7 +23,7 @@ export default function PostCard({ post, showSimilar = false, onRefresh }: PostC
   const [comments, setComments] = useState<any[]>([]);
   const [commentText, setCommentText] = useState('');
   const [similarPosts, setSimilarPosts] = useState<any[]>([]);
-  const [showWellness, setShowWellness] = useState(false);
+  const [showSupport, setShowSupport] = useState(false);
   const [showSimilarSection, setShowSimilarSection] = useState(false);
 
   const displayName = post.is_anonymous
@@ -99,21 +99,6 @@ export default function PostCard({ post, showSimilar = false, onRefresh }: PostC
     setSimilarPosts(data || []);
     setShowSimilarSection(true);
   };
-  const handleShare = async () => {
-    const shareText = `${post.content.slice(0, 100)}${post.content.length > 100 ? '...' : ''}\n\n— ${displayName} feeling ${post.emotion} on LifeTea`;
-    const shareUrl = window.location.origin + '/feed';
-    
-    if (navigator.share) {
-      try {
-        await navigator.share({ title: 'LifeTea Story', text: shareText, url: shareUrl });
-      } catch (err) {
-        // User cancelled sharing
-      }
-    } else {
-      await navigator.clipboard.writeText(`${shareText}\n${shareUrl}`);
-      toast.success('Copied to clipboard! 📋');
-    }
-  };
 
   return (
     <div className="bg-card rounded-2xl shadow-card hover:shadow-card-hover transition-all duration-300 p-5 border border-border animate-fade-up">
@@ -163,13 +148,9 @@ export default function PostCard({ post, showSimilar = false, onRefresh }: PostC
           <MessageCircle className="h-4 w-4" />
           {post.comments_count || 0}
         </button>
-        <button onClick={() => setShowWellness(true)} className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors">
+        <button onClick={() => setShowSupport(!showSupport)} className={`flex items-center gap-1.5 text-sm transition-colors ${showSupport ? 'text-primary' : 'text-muted-foreground hover:text-primary'}`}>
           <HandHeart className="h-4 w-4" />
           Support
-        </button>
-        <button onClick={handleShare} className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors">
-          <Share2 className="h-4 w-4" />
-          Share
         </button>
         {showSimilar && (
           <button onClick={loadSimilar} className="ml-auto text-xs text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
@@ -177,6 +158,16 @@ export default function PostCard({ post, showSimilar = false, onRefresh }: PostC
           </button>
         )}
       </div>
+
+      {/* Inline Support Section */}
+      {showSupport && (
+        <SupportSection
+          emotion={post.emotion}
+          supportMessage={post.support_message}
+          cognitiveDistortions={post.cognitive_distortions}
+          content={post.content}
+        />
+      )}
 
       {/* Poll */}
       <PostPoll postId={post.id} postUserId={post.user_id} />
@@ -225,10 +216,6 @@ export default function PostCard({ post, showSimilar = false, onRefresh }: PostC
             ))}
           </div>
         </div>
-      )}
-
-      {showWellness && (
-        <WellnessModal emotion={post.emotion} onClose={() => setShowWellness(false)} />
       )}
     </div>
   );
