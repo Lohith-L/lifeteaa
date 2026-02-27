@@ -1,6 +1,3 @@
-Here’s a **professional README** for your Life Tea project (ready to paste into `README.md`):
-
----
 
 # 🌿 Life Tea
 
