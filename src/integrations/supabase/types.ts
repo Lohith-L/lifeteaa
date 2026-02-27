@@ -267,6 +267,7 @@ export type Database = {
           ai_emotion: string | null
           anonymous_name: string | null
           category: string
+          cognitive_distortions: string[] | null
           comments_count: number
           content: string
           created_at: string
@@ -275,6 +276,7 @@ export type Database = {
           is_anonymous: boolean
           likes_count: number
           risk_level: string | null
+          support_message: string | null
           updated_at: string
           user_id: string
         }
@@ -282,6 +284,7 @@ export type Database = {
           ai_emotion?: string | null
           anonymous_name?: string | null
           category?: string
+          cognitive_distortions?: string[] | null
           comments_count?: number
           content: string
           created_at?: string
@@ -290,6 +293,7 @@ export type Database = {
           is_anonymous?: boolean
           likes_count?: number
           risk_level?: string | null
+          support_message?: string | null
           updated_at?: string
           user_id: string
         }
@@ -297,6 +301,7 @@ export type Database = {
           ai_emotion?: string | null
           anonymous_name?: string | null
           category?: string
+          cognitive_distortions?: string[] | null
           comments_count?: number
           content?: string
           created_at?: string
@@ -305,6 +310,7 @@ export type Database = {
           is_anonymous?: boolean
           likes_count?: number
           risk_level?: string | null
+          support_message?: string | null
           updated_at?: string
           user_id?: string
         }

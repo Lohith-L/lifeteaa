@@ -18,6 +18,8 @@ export default function CreatePost() {
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [loading, setLoading] = useState(false);
   const [aiEmotion, setAiEmotion] = useState('');
+  const [aiSupportMessage, setAiSupportMessage] = useState('');
+  const [aiDistortions, setAiDistortions] = useState<string[]>([]);
   const [riskLevel, setRiskLevel] = useState<'normal' | 'high' | 'critical' | null>(null);
   const [detecting, setDetecting] = useState(false);
 
@@ -35,6 +37,8 @@ export default function CreatePost() {
       });
       if (res.data) {
         setAiEmotion(res.data.emotion || '');
+        if (res.data.supportMessage) setAiSupportMessage(res.data.supportMessage);
+        if (res.data.cognitiveDistortions) setAiDistortions(res.data.cognitiveDistortions);
         if (!emotion && res.data.emotion) setEmotion(res.data.emotion);
         if (res.data.riskLevel === 'high' || res.data.riskLevel === 'critical') {
           setRiskLevel(res.data.riskLevel);
@@ -66,7 +70,9 @@ export default function CreatePost() {
         is_anonymous: isAnonymous,
         anonymous_name: anonymousName,
         risk_level: riskLevel === 'high' || riskLevel === 'critical' ? riskLevel : 'low',
-      });
+        support_message: aiSupportMessage || null,
+        cognitive_distortions: aiDistortions.length > 0 ? aiDistortions : [],
+      } as any);
       if (error) throw error;
       toast.success('Story shared! 🍵');
       navigate('/feed');
