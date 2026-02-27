@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
-import { Heart, MessageCircle, ChevronDown, ChevronUp } from 'lucide-react';
+import { Heart, MessageCircle, ChevronDown, ChevronUp, HandHeart } from 'lucide-react';
 import EmotionBadge from './EmotionBadge';
+import WellnessModal from './WellnessModal';
 import { formatTimeAgo } from '@/lib/emotions';
 import { toast } from 'sonner';
 
@@ -21,6 +22,7 @@ export default function PostCard({ post, showSimilar = false, onRefresh }: PostC
   const [comments, setComments] = useState<any[]>([]);
   const [commentText, setCommentText] = useState('');
   const [similarPosts, setSimilarPosts] = useState<any[]>([]);
+  const [showWellness, setShowWellness] = useState(false);
   const [showSimilarSection, setShowSimilarSection] = useState(false);
 
   const displayName = post.is_anonymous
@@ -145,6 +147,10 @@ export default function PostCard({ post, showSimilar = false, onRefresh }: PostC
           <MessageCircle className="h-4 w-4" />
           {post.comments_count || 0}
         </button>
+        <button onClick={() => setShowWellness(true)} className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors">
+          <HandHeart className="h-4 w-4" />
+          Support
+        </button>
         {showSimilar && (
           <button onClick={loadSimilar} className="ml-auto text-xs text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
             Similar {showSimilarSection ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
@@ -196,6 +202,10 @@ export default function PostCard({ post, showSimilar = false, onRefresh }: PostC
             ))}
           </div>
         </div>
+      )}
+
+      {showWellness && (
+        <WellnessModal emotion={post.emotion} onClose={() => setShowWellness(false)} />
       )}
     </div>
   );
