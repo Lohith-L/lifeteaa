@@ -1,96 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 250 30% 98%;
+    --foreground: 250 30% 12%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 255 40% 99%;
+    --card-foreground: 250 30% 12%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 255 40% 99%;
+    --popover-foreground: 250 30% 12%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 262 60% 58%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 210 60% 92%;
+    --secondary-foreground: 250 30% 18%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 250 20% 94%;
+    --muted-foreground: 250 10% 46%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 200 70% 90%;
+    --accent-foreground: 250 30% 18%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 58%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 250 20% 90%;
+    --input: 250 20% 90%;
+    --ring: 262 60% 58%;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
 
-    --sidebar-background: 0 0% 98%;
+    --sidebar-background: 250 30% 97%;
+    --sidebar-foreground: 250 20% 30%;
+    --sidebar-primary: 262 60% 58%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 250 30% 94%;
+    --sidebar-accent-foreground: 250 20% 20%;
+    --sidebar-border: 250 20% 90%;
+    --sidebar-ring: 262 60% 58%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* Custom LifeTea tokens */
+    --tea-purple: 262 60% 58%;
+    --tea-purple-light: 262 50% 92%;
+    --tea-blue: 210 70% 60%;
+    --tea-blue-light: 210 60% 92%;
+    --tea-pink: 330 60% 60%;
+    --tea-pink-light: 330 50% 94%;
+    --tea-green: 160 50% 50%;
+    --tea-green-light: 160 40% 92%;
+    --tea-orange: 30 80% 55%;
+    --tea-orange-light: 30 60% 92%;
+    --tea-red: 0 72% 58%;
+    --tea-yellow: 45 80% 55%;
+    --tea-yellow-light: 45 70% 92%;
 
-    --sidebar-primary: 240 5.9% 10%;
+    --gradient-hero: linear-gradient(135deg, hsl(262 60% 58%), hsl(210 70% 60%));
+    --gradient-card: linear-gradient(145deg, hsl(255 40% 99%), hsl(250 30% 96%));
+    --gradient-warm: linear-gradient(135deg, hsl(330 60% 60%), hsl(262 60% 58%));
 
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --shadow-card: 0 4px 24px -4px hsl(262 60% 58% / 0.08);
+    --shadow-card-hover: 0 8px 32px -4px hsl(262 60% 58% / 0.15);
+    --shadow-glow: 0 0 40px hsl(262 60% 58% / 0.15);
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --background: 250 30% 6%;
+    --foreground: 250 20% 92%;
+    --card: 250 25% 10%;
+    --card-foreground: 250 20% 92%;
+    --popover: 250 25% 10%;
+    --popover-foreground: 250 20% 92%;
+    --primary: 262 60% 65%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 250 20% 18%;
+    --secondary-foreground: 250 20% 92%;
+    --muted: 250 20% 16%;
+    --muted-foreground: 250 15% 60%;
+    --accent: 210 40% 20%;
+    --accent-foreground: 210 60% 90%;
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 250 20% 18%;
+    --input: 250 20% 18%;
+    --ring: 262 60% 65%;
+    --sidebar-background: 250 25% 8%;
+    --sidebar-foreground: 250 15% 85%;
+    --sidebar-primary: 262 60% 65%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 250 20% 14%;
+    --sidebar-accent-foreground: 250 15% 85%;
+    --sidebar-border: 250 20% 16%;
+    --sidebar-ring: 262 60% 65%;
   }
 }
 
@@ -98,8 +104,52 @@ All colors MUST be HSL.
   * {
     @apply border-border;
   }
-
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Nunito', sans-serif;
+  }
+  h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
   }
 }
+
+@layer utilities {
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+  .gradient-warm {
+    background: var(--gradient-warm);
+  }
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  .shadow-card-hover {
+    box-shadow: var(--shadow-card-hover);
+  }
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  .glass {
+    backdrop-filter: blur(12px);
+    background: hsl(var(--background) / 0.8);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-fade-up { animation: fade-up 0.6s ease-out forwards; }
+.animate-pulse-soft { animation: pulse-soft 2s ease-in-out infinite; }
